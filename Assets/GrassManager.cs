@@ -45,6 +45,10 @@ public class GrassManager : MonoBehaviour
     private Queue<GameObject> grassQueue;
     private List<GameObject> grassList;
     private Dictionary<GameObject, bool> waterList;
+
+    public AudioClip[] flowerSounds;
+    public AudioClip[] waterSounds;
+    public AudioClip[] winGrassSounds;
     
     void Start()
     {
@@ -151,6 +155,7 @@ public class GrassManager : MonoBehaviour
                     Destroy(extra);
                 }
             }
+            SoundManager.Instance.PlayRandomSFXClip(winGrassSounds, transform);
 
             waterText.text = ":" + grassQueue.Count;
             if (!grassList.Contains(g))
@@ -180,6 +185,7 @@ public class GrassManager : MonoBehaviour
                 f.flowerUi.GetComponent<Image>().sprite = flowerSprite;
                 f.flower.GetComponent<SpriteRenderer>().sprite = flowerFlourishedSprite;
                 f.flower.GetComponent<SpriteRenderer>().sortingOrder = 5;
+                SoundManager.Instance.PlayRandomSFXClip(flowerSounds, transform);
             }
         }
 
@@ -189,6 +195,7 @@ public class GrassManager : MonoBehaviour
             float dist = Vector2.Distance(g.transform.position, w.transform.position);
             if (dist < minRange)
             {
+                SoundManager.Instance.PlayRandomSFXClip(waterSounds, transform);
                 waterList[w] = true;
                 Debug.Log("Water touched!");
                 int extraWater = waterFlowerCount;
@@ -210,6 +217,7 @@ public class GrassManager : MonoBehaviour
             if (!grassList[i].activeSelf) continue;
             grassList[i].GetComponent<SpriteRenderer>().sprite = winGrassSprite;
             yield return new WaitForSeconds(0.05f); // Adjust delay as needed
+            SoundManager.Instance.PlayRandomSFXClip(winGrassSounds, transform);
         }
 
         SceneManager.LoadScene("Level Complete", LoadSceneMode.Additive);

@@ -473,6 +473,12 @@ MonoBehaviour:
   maxRange: 0.3
   startingGrassCount: 30
   waterFlowerCount: 20
+  flowerSounds:
+  - {fileID: 8300000, guid: 586bcc1e189e044e2a9650e7d1ba4aff, type: 3}
+  waterSounds:
+  - {fileID: 8300000, guid: 2e9857e10af10412cb9ad91982236882, type: 3}
+  winGrassSounds:
+  - {fileID: 8300000, guid: 9d25925de31b4461bb6b0562b53d3cc5, type: 3}
 --- !u!4 &230014369
 Transform:
   m_ObjectHideFlags: 0

@@ -39,6 +39,7 @@ public class Complete : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < numberOfFlowers; i++)
         {
+            SoundManager.Instance.PlayRandomSFXClip(gm.flowerSounds, transform);
             flowers[i].GetComponent<Image>().sprite = gm.flowerSprite;
             yield return new WaitForSeconds(0.5f);
         }
