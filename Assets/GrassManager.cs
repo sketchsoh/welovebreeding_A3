@@ -1,11 +1,14 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GrassManager : MonoBehaviour
 {
+    public string levelName;
     public GameObject grassPrefab;
     public GameObject grassStart;
     public GameObject waterEnd;
@@ -20,19 +23,25 @@ public class GrassManager : MonoBehaviour
 
     public GameObject water1;
     public GameObject water2;
+
+    public GameObject sand;
     
-    private List<Flower> flowerList;
+    public List<Flower> flowerList;
+    public List<GameObject> rocks;
     public Sprite flowerSprite;
     public Sprite flowerFlourishedSprite;
     public Sprite fertilizerSprite;
     public Sprite defaultFlowerSprite;
+    public Sprite winGrassSprite;
     public TextMeshProUGUI waterText;
 
     public float minRange;
     public float maxRange;
     
     public int startingGrassCount;
+    public int waterFlowerCount;
     private int grassCount;
+    private bool stageEnd;
     private Queue<GameObject> grassQueue;
     private List<GameObject> grassList;
     private Dictionary<GameObject, bool> waterList;
@@ -50,6 +59,7 @@ public class GrassManager : MonoBehaviour
 
     void InitPool()
     {
+        stageEnd = false;
         grassQueue = new Queue<GameObject>();
         grassCount = startingGrassCount;
         waterText.text = ":" + startingGrassCount;
@@ -87,6 +97,7 @@ public class GrassManager : MonoBehaviour
 
     void PlaceGrass()
     {
+        if (stageEnd) return;
         if (grassQueue.Count == 0) return;
         if (Input.GetMouseButton(0))
         {
@@ -94,6 +105,7 @@ public class GrassManager : MonoBehaviour
             
             bool tooClose = false;
             bool inRange = false;
+
 
             Vector2 camPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             foreach (GameObject grass in grassList)
@@ -115,9 +127,31 @@ public class GrassManager : MonoBehaviour
 
             if (tooClose || !inRange) return;
             GameObject g = grassQueue.Dequeue();
-            grassList.Add(g);
-            g.SetActive(true);
             g.transform.position = camPos;
+            if (rocks.Count != 0)
+            {
+                foreach (var rock in rocks)
+                {
+                    if (rock.GetComponent<SpriteRenderer>().bounds.Contains(g.transform.position))
+                    {
+                        grassQueue.Enqueue(g);
+                        return;
+                    }
+                }
+            }
+
+            g.SetActive(true);
+            grassList.Add(g);
+            if (sand != null)
+            {
+                if (sand.GetComponent<SpriteRenderer>().bounds
+                    .Contains(g.GetComponent<SpriteRenderer>().bounds.center))
+                {
+                    GameObject extra = grassQueue.Dequeue();
+                    Destroy(extra);
+                }
+            }
+
             waterText.text = ":" + grassQueue.Count;
             if (!grassList.Contains(g))
                 grassList.Add(g);
@@ -128,6 +162,13 @@ public class GrassManager : MonoBehaviour
 
     void CheckContact(GameObject g)
     {
+        if (waterEnd.GetComponent<SpriteRenderer>().bounds.Contains(g.GetComponent<SpriteRenderer>().bounds.center) && !stageEnd)
+        {
+            stageEnd = true;
+            Debug.Log("Win");
+            StartCoroutine(WinSequence());
+            return;
+        }
         foreach (Flower f in flowerList)
         {
             if (f.touched) continue;
@@ -150,7 +191,7 @@ public class GrassManager : MonoBehaviour
             {
                 waterList[w] = true;
                 Debug.Log("Water touched!");
-                int extraWater = 15;
+                int extraWater = waterFlowerCount;
                 for (int i = 0; i < extraWater; i++)
                 {
                     GameObject grass = Instantiate(grassPrefab, transform, true);
@@ -160,6 +201,18 @@ public class GrassManager : MonoBehaviour
                 waterText.text = ":" + grassQueue.Count;
             }
         }
+    }
+    
+    IEnumerator WinSequence()
+    {
+        for (int i = grassList.Count - 1; i >= 0; i--)
+        {
+            if (!grassList[i].activeSelf) continue;
+            grassList[i].GetComponent<SpriteRenderer>().sprite = winGrassSprite;
+            yield return new WaitForSeconds(0.05f); // Adjust delay as needed
+        }
+
+        SceneManager.LoadScene("Level Complete", LoadSceneMode.Additive);
     }
 
     public void ResetStage()
@@ -172,9 +225,14 @@ public class GrassManager : MonoBehaviour
         }
         InitPool();
     }
+
+    public void PauseStage()
+    {
+        SceneManager.LoadScene("Pause", LoadSceneMode.Additive);
+    }
 }
 
-class Flower
+public class Flower
 {
     public GameObject flower;
     public GameObject flowerUi;

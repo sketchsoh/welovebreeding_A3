@@ -41,12 +41,12 @@ public class PlayScript : MonoBehaviour
     
     private void SwitchToGame()
     {
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Level1HowTo", LoadSceneMode.Single);
     }
     
     private void SwitchToGame2()
     {
-        SceneManager.LoadScene("Level2");
+        SceneManager.LoadScene("Level2HowTo", LoadSceneMode.Single);
     }
     
     private void SwitchToGame3()
