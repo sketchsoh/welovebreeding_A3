@@ -37,6 +37,8 @@ public class PlayScript : MonoBehaviour
             .BindToColorA(Fade);
     }
     
+    
+    
     private void SwitchToGame()
     {
         SceneManager.LoadScene("Level1");
@@ -51,4 +53,5 @@ public class PlayScript : MonoBehaviour
     {
         SceneManager.LoadScene("Main Menu");
     } 
+    
 }

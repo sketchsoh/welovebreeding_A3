@@ -11,6 +11,11 @@
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Level1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Level1.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Textures/bg.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/bg.png.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Textures/sprout2.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/sprout2.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main Menu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main Menu.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MainMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MainMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Textures/bg.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/bg.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +24,7 @@
   </component>
   <component name="DpaMonitoringSettings">
     <option name="firstShow" value="false" />
+    <option name="autoShow" value="false" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -100,6 +106,10 @@
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
       <option name="pid" value="22783" />
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="71405">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" value="71405" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
         <list>
@@ -127,6 +137,7 @@
       <workItem from="1772596603689" duration="4000" />
       <workItem from="1772602399135" duration="2671000" />
       <workItem from="1773019040318" duration="9656000" />
+      <workItem from="1773020574681" duration="1293000" />
     </task>
     <servers />
   </component>
@@ -158,6 +169,19 @@
           <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="3" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/MainMenu.cs</url>
+          <line>19</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/MainMenu.cs" containingFunctionPresentation="Method 'StartGame'">
+            <startOffsets>
+              <option value="371" />
+            </startOffsets>
+            <endOffsets>
+              <option value="372" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

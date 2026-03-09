@@ -25,11 +25,27 @@ public class MainMenu : MonoBehaviour
             .WithOnComplete(SwitchToGame)
             .BindToColorA(Fade);
     }
+    
+    public void Options()
+    {
+        Fade.gameObject.SetActive(true);
+        SoundManager.Instance.PlayRandomSFXClip(startbtnSFX, transform, true, 1f);
+        LMotion.Create(0f, 1f, 0.5f)
+            .WithOnComplete(SwitchToGame2)
+            .BindToColorA(Fade);
+    }
 
     private void SwitchToGame()
     {
         SceneManager.LoadScene("LevelSelect");
     }
+    
+    private void SwitchToGame2()
+    {
+        SceneManager.LoadScene("Options");
+    } 
+    
+    
     
     // public void QuitGame()
     // {
